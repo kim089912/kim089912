@@ -2,6 +2,9 @@
 
 Starting development Since 2021.10.19  
 
+<img alt="php" src ="https://img.shields.io/badge/PHP-#777BB4.svg?&style=for-the-badge&logo=#777BB4&logoColor=black"/>
+     
+     
 PHP,JAVA,PYTHON,JS,HTML,SHELL,mysql,oracle  
 spring  
 Eclipse,sqlyog  
