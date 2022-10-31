@@ -2,7 +2,7 @@
 
 Starting development Since 2021.10.19  
 
-PHP,JAVA,PYTHON,JS,HTML,SHELL,mysql,oracle 
+PHP,JAVA,PYTHON,JS,HTML,SHELL,mysql,oracle  
 spring  
 Eclipse,sqlyog  
 DOCKER,ANACONDA  
