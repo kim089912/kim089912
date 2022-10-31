@@ -3,7 +3,9 @@
 https://github.com/kyechan99/capsule-render#rotate
 -->
 ![header](https://capsule-render.vercel.app/api?type=wave&color=baeffc&height=200&section=header&text=Pang%20Pang&fontSize=90&fontColor=ffffff)  
-Starting development Since 2021.10.19  
+<div align="center">
+  <h4>Starting development Since 2021.10.19</h4>
+</div>
 <!-- 헤더 끝 -->
 
 <!-- 개발 스택 시작 -->
