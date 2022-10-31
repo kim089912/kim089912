@@ -1,5 +1,13 @@
 ### Hi there 👋
 
+Starting development Since 2021.10.19  
+
+PHP,JAVA,PYTHON,JS,HTML,SHELL  
+DOCKER,ANACONDA  
+LINUX(Ubuntu),WINDOWS  
+
+[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=kim089912)](https://github.com/anuraghazra/github-readme-stats)
+
 <!--
 **kim089912/kim089912** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
@@ -15,4 +23,4 @@ Here are some ideas to get you started:
 - ⚡ Fun fact: ...
 -->
 
-[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=kim089912)](https://github.com/anuraghazra/github-readme-stats)
+
