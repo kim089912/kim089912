@@ -2,10 +2,10 @@
 
 Starting development Since 2021.10.19  
 <!--
-<img src="https://img.shields.io/badge/표시할이름(dwdwd)-색상(#777BB4)?style=for-the-badge&logo=기술스택아이콘(PHP)&logoColor=(로고색상)white">
+<img src="https://img.shields.io/badge/표시할이름(dwdwd)-색상(777BB4)?style=for-the-badge&logo=기술스택아이콘(PHP)&logoColor=(로고색상)white">
 -->
 
-<img src="https://img.shields.io/badge/PHP-#777BB4?style=for-the-badge&logo=PHP&logoColor=white">     
+<img src="https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=PHP&logoColor=white">     
      
 PHP,JAVA,PYTHON,JS,HTML,SHELL,mysql,oracle  
 spring  
