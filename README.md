@@ -31,7 +31,7 @@ https://byul91oh.tistory.com/214
 <!-- 개발 스택 끝 -->
 
 <!-- 레이아웃 언어 시작 -->
-  [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=kim089912&layout=compact)](https://github.com/anuraghazra/github-readme-stats)
+[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=kim089912&layout=compact)](https://github.com/anuraghazra/github-readme-stats)
 <!-- 레이아웃 언어 끝 -->
 
 <!--
