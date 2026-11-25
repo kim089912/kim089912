@@ -1,57 +1,33 @@
-<!-- 헤더 시작 -->
-<!-- 참조
-https://github.com/kyechan99/capsule-render#rotate
--->
-![header](https://capsule-render.vercel.app/api?type=wave&color=baeffc&height=200&section=header&text=RU%20RU&fontSize=90&fontColor=ffffff)  
-<div align="center">
-  <h4>Starting development Since 2021.10.19</h4>
-</div>
-<!-- 헤더 끝 -->
+<img src="assets/hero-dark.svg#gh-dark-mode-only" width="100%" alt="RU RU (kim089912). 2021년 10월 19일에 개발을 시작해 지금 6년차. 2026년 11월부터 비서관 루코와 같이 일한다.">
+<img src="assets/hero-light.svg#gh-light-mode-only" width="100%" alt="RU RU (kim089912). 2021년 10월 19일에 개발을 시작해 지금 6년차. 2026년 11월부터 비서관 루코와 같이 일한다.">
 
-<!-- 개발 스택 시작 -->
-<!-- 참조
-https://shields.io/
-https://simpleicons.org/
-https://byul91oh.tistory.com/214
-<img src="https://img.shields.io/badge/표시할이름(dwdwd)-색상(777BB4)?style=for-the-badge&logo=기술스택아이콘(PHP)&logoColor=(로고색상)white">
--->
-<div align="center">
-  <hr>
-  <h2>Development Stacks</h2>
+2021년 10월 19일에 개발을 시작해 지금 **6년차**입니다. 기획, DB, 백엔드, 프런트, 디자인, 서버를 혼자 맡아 웹 소프트웨어를 만듭니다. 2026년부터는 직접 만든 비서관 **루코(Rooco)** 와 같이 일합니다.
 
+## 루코와 일하는 방식
 
-  <h4>Development Languages</h4>
-  <img src="https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=PHP&logoColor=white"> <img src="https://img.shields.io/badge/JAVA-007396?style=for-the-badge&logo=java&logoColor=white"> <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=Python&logoColor=white"> <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"> <img src="https://img.shields.io/badge/jquery-0769AD?style=for-the-badge&logo=jquery&logoColor=white"> <img src="https://img.shields.io/badge/html-E34F26?style=for-the-badge&logo=html5&logoColor=white"> <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white"> <img src="https://img.shields.io/badge/oracle-F80000?style=for-the-badge&logo=oracle&logoColor=white"> <img src="https://img.shields.io/badge/Shell-FFD500?style=for-the-badge&logo=Shell&logoColor=white"> 
+루코는 Claude Code에서 일하는 비서관입니다. **Claude Fable 5.2** 위에서 돌아가고, 이름과 말투와 일하는 기준은 제가 정했습니다. 저는 말하고 결정합니다. 루코는 브랜치를 만들고, 답변마다 커밋하고, 테스트를 통과한 것만 합칩니다.
 
-  <h4>Development Tools</h4>
-  <img src="https://img.shields.io/badge/Anaconda-44A833?style=for-the-badge&logo=Anaconda&logoColor=white"> <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=Docker&logoColor=white"> <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
+<img src="assets/flow-dark.svg#gh-dark-mode-only" width="100%" alt="일하는 순서. 내가 고쳐 달라고 하면 루코가 작업 브랜치를 만들고 답변마다 커밋한다. 업데이트하라고 하면 브랜치를 깃허브에 올려 테스트하고, 릴리즈하라고 하면 main에 합쳐 태그를 붙이고 릴리즈한다.">
+<img src="assets/flow-light.svg#gh-light-mode-only" width="100%" alt="일하는 순서. 내가 고쳐 달라고 하면 루코가 작업 브랜치를 만들고 답변마다 커밋한다. 업데이트하라고 하면 브랜치를 깃허브에 올려 테스트하고, 릴리즈하라고 하면 main에 합쳐 태그를 붙이고 릴리즈한다.">
 
-  <h4>Development Framework</h4>
-  <img src="https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=Spring&logoColor=white">
+- 파일을 고치기 전에 작업 브랜치부터 만듭니다.
+- 테스트하지 않은 것은 `main`에 합치지 않습니다.
+- git 명령은 실행하기 전에 말하고, 끝나면 실행한 순서대로 보고합니다.
+- 버전은 `v빅.미들.스몰`로 세고, 합칠 때마다 태그를 붙여 릴리즈합니다.
 
-  <h4>Development OS</h4>
-  <img src="https://img.shields.io/badge/linux-FCC624?style=for-the-badge&logo=linux&logoColor=black"> <img src="https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=Windows&logoColor=black">
-  <hr>
-</div>
-<!-- 개발 스택 끝 -->
+## 쓰는 것
 
-<!-- 레이아웃 언어 시작 -->
-[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=kim089912&layout=compact)](https://github.com/anuraghazra/github-readme-stats)
-<!-- 레이아웃 언어 끝 -->
+| 구분 | |
+| --- | --- |
+| 언어 | `PHP` `Java` `Python` `JavaScript` `HTML` `CSS` `SQL` `Shell` |
+| 프레임워크 | `Laravel` `Spring` `jQuery` `Blade` |
+| 데이터베이스 | `MariaDB` `MySQL` `Oracle` |
+| 서버 | `Linux` `Rocky Linux` `Apache` `PHP-FPM` `Supervisor` `Windows` |
+| 클라우드 | `NAVER Cloud Platform` `Object Storage` |
+| 연동 | `알리고 문자` `알리고 알림톡` |
+| 도구 | `Git` `GitHub` `GitHub CLI` `Docker` `Anaconda` `Composer` |
+| AI | `Claude Code` `Claude Fable 5.2` `Rooco` |
 
-<!--
-**kim089912/kim089912** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+---
 
-Here are some ideas to get you started:
-
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
-
-
+이 프로필은 루코가 작업 브랜치에서 만들고 `v2.0.0`으로 릴리즈했습니다.
