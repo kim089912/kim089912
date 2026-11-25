@@ -1,6 +1,6 @@
 <?php
 /**
- * 프로필 그림 세 장(assets/hero.svg, flow.svg, stack.svg)을 만든다.
+ * 프로필 그림(assets/ 의 hero, flow, works, work-*, rooco, stack)을 만든다.
  *
  * 사용:  php tools/build.php v2.0.1
  *        인자는 이번에 릴리즈할 버전이다. 그림 안의 버전 표시에 쓰인다.
@@ -51,9 +51,8 @@ function n(float $v): string
 }
 
 /** 모든 패널이 같이 쓰는 바탕: 같은 색조의 어두운 면, 둥근 모서리, 가는 테두리. */
-function panel(int $h, string $title, string $desc, string $css, string $defs, string $body): string
+function panel(int $h, string $title, string $desc, string $css, string $defs, string $body, int $w = W): string
 {
-    $w = W;
     $bw = $w - 1.5;
     $bh = $h - 1.5;
     return <<<SVG
@@ -293,7 +292,183 @@ $body .= '<path d="M' . PAD . ' ' . $yEnd . 'H' . (W - PAD) . '" stroke="#fff" s
 
 file_put_contents(__DIR__ . '/../assets/stack.svg', panel($H, '쓰는 것', implode('. ', $descParts) . '.', '', '', $body));
 
-foreach (['hero', 'flow', 'stack'] as $name) {
+// ───────────────────────────────────────────────────────────── 4. 만든 것 (갤러리)
+// 머리 패널 하나, 화면이 든 타일 열 장, 루코 타일 하나. 타일은 README에서 두 장씩 나란히 놓인다.
+// 화면은 tools/shots 의 JPEG를 그림 안에 담는다(README의 그림은 밖의 파일을 불러오지 못한다).
+// 타일은 폭 640으로 그려 절반 크기로 놓이므로, 글자 크기와 모서리 값은 큰 패널과 같은 값을 쓴다.
+const TILE_W = 640;
+const TILE_H = 504;
+const TILE_GAP = 19; // 두 타일 사이 간격의 절반. 화면에서 패널 사이의 세로 간격과 같아지는 값
+const SHOT = ['x' => 16, 'y' => 16, 'w' => 608, 'h' => 380, 'rx' => 12]; // 바깥 모서리 28 - 여백 16
+
+/** JPEG 한 장을 그림 안에 담을 주소와 크기로. */
+function shot(string $name): array
+{
+    $path = __DIR__ . "/shots/$name.jpg";
+    $size = @getimagesize($path);
+    if ($size === false) {
+        throw new RuntimeException("화면 파일이 없다: tools/shots/$name.jpg (tools/make-thumbs.ps1 로 만든다)");
+    }
+    return ['href' => 'data:image/jpeg;base64,' . base64_encode(file_get_contents($path)), 'w' => $size[0], 'h' => $size[1]];
+}
+
+/** 글줄이 주어진 폭을 넘으면 만들지 않고 멈춘다. 넘친 글자는 타일 밖으로 잘려 보이지 않기 때문이다. */
+function fits(string $font, string $s, float $size, float $max, float $track = 0): void
+{
+    $w = tw($font, $s, $size, $track);
+    if ($w > $max) {
+        throw new RuntimeException(sprintf('글줄이 넘친다(%.0f > %.0f): %s', $w, $max, $s));
+    }
+}
+
+/** 화면 자리의 테두리. */
+function shotFrame(array $a): string
+{
+    return '<rect x="' . ($a['x'] + .75) . '" y="' . ($a['y'] + .75) . '" width="' . ($a['w'] - 1.5) . '" height="' . ($a['h'] - 1.5) . '" rx="' . ($a['rx'] - .75) . '" fill="none" stroke="#fff" stroke-opacity=".12" stroke-width="1.5"/>';
+}
+
+/** 타일 한 장. $work = [파일 이름, 이름, 한 줄 설명, 보여 줄 주소 또는 null(로그인 화면)], $side = 0 왼쪽 자리, 1 오른쪽 자리 */
+function workTile(array $work, int $side): string
+{
+    [$key, $name, $desc, $domain] = $work;
+    $a = SHOT;
+    $img = shot($key);
+    $defs = '<clipPath id="area"><rect x="' . $a['x'] . '" y="' . $a['y'] . '" width="' . $a['w'] . '" height="' . $a['h'] . '" rx="' . $a['rx'] . '"/></clipPath>';
+
+    if ($img['h'] > $img['w']) {
+        // 휴대폰 화면: 대문과 같은 점무늬 바탕 위에, 휴대폰이 아래에서 올라온 모양으로 놓는다.
+        $sw = 236.0;                               // 화면 폭
+        $sh = $sw * $img['h'] / $img['w'];
+        $sx = TILE_W / 2 - $sw / 2;
+        $sy = $a['y'] + 40.0;
+        $box = 'x="' . $a['x'] . '" y="' . $a['y'] . '" width="' . $a['w'] . '" height="' . $a['h'] . '"';
+        $defs .= '<pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="15" cy="15" r="1.5" fill="#fff" fill-opacity=".07"/></pattern>'
+            . '<radialGradient id="lift" gradientUnits="userSpaceOnUse" cx="' . (TILE_W / 2) . '" cy="250" r="300"><stop offset="0" stop-color="#fff" stop-opacity=".14"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>'
+            . '<clipPath id="screen"><rect x="' . n($sx) . '" y="' . n($sy) . '" width="' . n($sw) . '" height="' . n($sh) . '" rx="24"/></clipPath>';
+        $picture = '<g clip-path="url(#area)">'
+            . '<rect ' . $box . ' fill="#0a1219"/><rect ' . $box . ' fill="url(#grid)"/><rect ' . $box . ' fill="url(#lift)"/>'
+            . '<rect x="' . n($sx - 9) . '" y="' . n($sy - 9) . '" width="' . n($sw + 18) . '" height="' . n($sh + 18) . '" rx="33" fill="#05090d" stroke="#fff" stroke-opacity=".22" stroke-width="1.5"/>'
+            . '<g clip-path="url(#screen)"><image x="' . n($sx) . '" y="' . n($sy) . '" width="' . n($sw) . '" height="' . n($sh) . '" href="' . $img['href'] . '"/></g>'
+            . '</g>';
+    } else {
+        $picture = '<g clip-path="url(#area)"><image x="' . $a['x'] . '" y="' . $a['y'] . '" width="' . $a['w'] . '" height="' . $a['h'] . '" preserveAspectRatio="xMidYMin slice" href="' . $img['href'] . '"/></g>';
+    }
+
+    // 오른쪽 꼬리표: 누구나 들어갈 수 있는 곳은 주소와 화살표, 로그인이 필요한 곳은 자물쇠.
+    $right = TILE_W - 28;
+    if ($domain !== null) {
+        $tagW = tw('m', $domain, 19) + 22;
+        $ax = $right - 11;
+        $tag = t('m', $domain, 19, $right - 22, 442, MUTED, 0, 'end')
+            . '<path d="M' . $ax . ' 440L' . ($ax + 10) . ' 430M' . ($ax + 3) . ' 430H' . ($ax + 10) . 'V437" fill="none" stroke="' . MUTED . '" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>';
+        $where = "주소 $domain";
+    } else {
+        $label = '로그인 화면';
+        $tagW = tw('m', $label, 19) + 24;
+        $lx = $right - tw('m', $label, 19) - 24;
+        $tag = t('m', $label, 19, $right, 442, MUTED, 0, 'end')
+            . '<rect x="' . n($lx) . '" y="431" width="14" height="11" rx="2.5" fill="' . MUTED . '"/>'
+            . '<path d="M' . n($lx + 3) . ' 431v-3.5a4 4 0 0 1 8 0V431" fill="none" stroke="' . MUTED . '" stroke-width="2"/>';
+        $where = '로그인이 필요한 시스템이라 로그인 화면만 실었다';
+    }
+    fits('b', $name, 28, TILE_W - 56 - $tagW - 20, -0.5);
+    fits('r', $desc, 20, TILE_W - 56, -0.2);
+
+    $body = $picture . shotFrame($a)
+        . t('b', $name, 28, 28, 444, FG, -0.5)
+        . $tag
+        . t('r', $desc, 20, 28, 478, MUTED, -0.2);
+    // README에서 두 장은 빈틈없이 붙어 놓인다(사이에 글자 하나만 있어도 줄이 넘어간다).
+    // 그래서 사이 간격은 그림 안에 둔다: 왼쪽 타일은 오른쪽에, 오른쪽 타일은 왼쪽에 빈 띠를 붙인다.
+    $svg = panel(TILE_H, $name, "$desc. $where.", '', $defs, $body, TILE_W);
+    $from = 'viewBox="0 0 ' . TILE_W . ' ' . TILE_H . '"';
+    $to = 'viewBox="' . ($side === 0 ? '0' : '-' . TILE_GAP) . ' 0 ' . (TILE_W + TILE_GAP) . ' ' . TILE_H . '"';
+    if (substr_count($svg, $from) !== 1) {
+        throw new RuntimeException('타일의 viewBox를 찾지 못했다');
+    }
+    return str_replace($from, $to, $svg);
+}
+
+$works = [
+    ['byplus', '분양플러스', '시선을 사로잡는 분양 사이트 제작', 'byangplus.com'],
+    ['auctionplus', '옥션플러스', '부산·경남 경매 입찰 대리, 권리 분석, 현장 조사', 'auctionplus.co.kr'],
+    ['ez2jobs', 'EZ2JOBS', 'AI 블로그 자동 작성과 크리에이터 동영상 편집기', 'ez2jobs.com'],
+    ['finders', '잇방', '외국인을 위한 부산 임대 매물 지도', '잇방.com'],
+    ['m-finders', '잇방 모바일', '휴대폰에서 쓰는 잇방', 'm.잇방.com'],
+    ['e-m-finders', '잇방 중개사 모바일', '중개사가 휴대폰에서 쓰는 잇방', null],
+    ['e-finders', '잇방 중개사', '중개사가 쓰는 잇방', null],
+    ['aos', 'T-VULCAN AOS', 'AOS API 연동 플랫폼', null],
+    ['inventory', '티벌컨 재고관리', '제품·위치별 재고와 입출고 관리', null],
+    ['vcare', 'T-VULCAN V-CARE', '중고차 보증·보험 업무 관리', null],
+];
+$made = [];
+foreach ($works as $i => $work) {
+    file_put_contents(__DIR__ . "/../assets/work-{$work[0]}.svg", workTile($work, $i % 2));
+    $made[] = "work-{$work[0]}";
+}
+
+// 머리 패널: 일하는 방식 패널의 머리와 같은 짜임(왼쪽 두 줄 제목, 오른쪽 설명 세 줄).
+$count = count($works);
+$H = 224;
+$body = t('b', '만든 것', 44, PAD, 112, FG, -1)
+    . t('b', "사이트와 시스템 {$count}개.", 44, PAD, 168, MUTED, -1)
+    . t('r', '주소가 적힌 것은 누르면 그 사이트로 간다.', 23, W - PAD, 100, MUTED, -0.2, 'end')
+    . t('r', '로그인이 필요한 시스템은 로그인 화면만 실었다.', 23, W - PAD, 134, MUTED, -0.2, 'end')
+    . t('r', '저장소는 모두 비공개다.', 23, W - PAD, 168, MUTED, -0.2, 'end');
+file_put_contents(__DIR__ . '/../assets/works.svg', panel(
+    $H,
+    '만든 것',
+    "사이트와 시스템 {$count}개. 주소가 적힌 것은 누르면 그 사이트로 간다. 로그인이 필요한 시스템은 로그인 화면만 실었다. 저장소는 모두 비공개다.",
+    '',
+    '',
+    $body
+));
+
+// 루코 타일: 왼쪽에 그림, 오른쪽에 소개. 강조색은 루코의 것이라 여기서는 넉넉히 쓴다.
+$H = 432;
+$a = ['x' => 16, 'y' => 16, 'w' => 600, 'h' => 400, 'rx' => 12];
+$img = shot('rooco');
+$tx = 668.0;
+$tmax = W - PAD - $tx;
+$lines = [
+    ['b', "위의 화면 {$count}장은 루코가 찍었다.", 30, 258, FG, -0.5],
+    ['r', '저장소를 올린 것도, 이 갤러리를 만든 것도 루코다.', 23, 300, MUTED, -0.2],
+    ['r', '이름과 말투와 일하는 기준은 내가 정했다.', 23, 334, MUTED, -0.2],
+];
+$text = '';
+foreach ($lines as [$font, $s, $size, $y, $fill, $track]) {
+    fits($font, $s, $size, $tmax, $track);
+    $text .= t($font, $s, $size, $tx, $y, $fill, $track);
+}
+$nameW = tw('k', '루코', 104, -3);
+$chips = '';
+$x = $tx;
+foreach (['Claude Fable 5.2', 'Claude Code', '비서관'] as $item) {
+    $cw = tw('m', $item, 22, -0.2) + 36;
+    $chips .= '<rect x="' . n($x) . '" y="362" width="' . n($cw) . '" height="42" rx="21" fill="' . ACCENT . '" fill-opacity=".12" stroke="' . ACCENT . '" stroke-opacity=".6" stroke-width="1.5"/>'
+        . t('m', $item, 22, $x + 18, 390.5, '#b6f7ec', -0.2);
+    $x += $cw + 10;
+}
+$defs = '<clipPath id="area"><rect x="' . $a['x'] . '" y="' . $a['y'] . '" width="' . $a['w'] . '" height="' . $a['h'] . '" rx="' . $a['rx'] . '"/></clipPath>'
+    . '<linearGradient id="num" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7cf0de"/><stop offset="1" stop-color="#14b8a6"/></linearGradient>'
+    . '<radialGradient id="glow" gradientUnits="userSpaceOnUse" cx="640" cy="216" r="520"><stop offset="0" stop-color="#2dd4bf" stop-opacity=".2"/><stop offset="1" stop-color="#2dd4bf" stop-opacity="0"/></radialGradient>';
+$body = '<rect width="' . W . '" height="' . $H . '" fill="url(#glow)"/>'
+    . '<g clip-path="url(#area)"><image x="' . $a['x'] . '" y="' . $a['y'] . '" width="' . $a['w'] . '" height="' . $a['h'] . '" preserveAspectRatio="xMidYMin slice" href="' . $img['href'] . '"/></g>'
+    . shotFrame($a)
+    . t('m', '같이 일하는 비서관', 22, $tx, 78, MUTED)
+    . t('k', '루코', 104, $tx - 4, 190, 'url(#num)', -3)
+    . t('m', 'Rooco', 30, $tx + $nameW + 14, 190, MUTED)
+    . $text . $chips;
+file_put_contents(__DIR__ . '/../assets/rooco.svg', panel(
+    $H,
+    '루코 (Rooco)',
+    "같이 일하는 비서관 루코. Claude Code에서 Claude Fable 5.2로 일한다. 위의 화면 {$count}장을 찍고, 저장소를 올리고, 이 갤러리를 만들었다. 이름과 말투와 일하는 기준은 내가 정했다.",
+    '',
+    $defs,
+    $body
+));
+
+foreach (array_merge(['hero', 'flow', 'works'], $made, ['rooco', 'stack']) as $name) {
     printf("assets/%s.svg  %s bytes\n", $name, number_format(filesize(__DIR__ . "/../assets/$name.svg")));
 }
 printf("연차: %d년차, 버전: %s\n", $years, $VERSION);
