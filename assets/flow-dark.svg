@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 400" role="img" aria-labelledby="t d">
+  <title id="t">루코와 일하는 순서</title>
+  <desc id="d">내가 고쳐 달라고 하면 루코가 작업 브랜치를 만든다. 루코는 답변마다 커밋하고, 내가 업데이트하라고 하면 브랜치를 깃허브에 올려 테스트한다. 내가 릴리즈하라고 하면 main에 합치고 태그를 붙여 릴리즈한다.</desc>
+  <style>
+    :root { --fg: #e8f1f2; --muted: #8b9aa3; --accent: #2dd4bf; }
+
+    text { fill: var(--fg); font-family: "Pretendard Variable", Pretendard, "Segoe UI Variable Display", "Segoe UI", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", system-ui, sans-serif; }
+    .mono { font-family: ui-monospace, "Cascadia Code", "SF Mono", Consolas, monospace; font-size: 20px; fill: var(--muted); }
+    .said { font-size: 26px; font-weight: 700; letter-spacing: -0.4px; }
+    .does { font-size: 26px; font-weight: 500; letter-spacing: -0.4px; }
+    .note { font-size: 20px; fill: var(--muted); }
+
+    .s-on { stop-color: var(--fg); stop-opacity: .34; }
+    .s-off { stop-color: var(--fg); stop-opacity: 0; }
+    .line { fill: none; stroke-width: 2.5; stroke-linecap: round; }
+    .work { stroke: var(--fg); stroke-opacity: .34; }
+    .tick { stroke: var(--fg); stroke-opacity: .34; stroke-width: 2; }
+    .dot { fill: var(--fg); }
+    .now { fill: var(--accent); }
+  </style>
+
+  <defs>
+    <linearGradient id="main" gradientUnits="userSpaceOnUse" x1="40" y1="0" x2="1240" y2="0">
+      <stop offset="0" class="s-on"/><stop offset=".88" class="s-on"/><stop offset="1" class="s-off"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 위: 내가 하는 말 두 마디 -->
+  <text x="200" y="46" class="said" text-anchor="middle">“고쳐 줘”</text>
+  <text x="200" y="78" class="note" text-anchor="middle">브랜치를 만든다</text>
+  <path class="tick" d="M200 94V118"/>
+
+  <text x="1040" y="46" class="said" text-anchor="middle">“릴리즈해”</text>
+  <text x="1040" y="78" class="note" text-anchor="middle">합치고 태그를 붙여 릴리즈</text>
+  <path class="tick" d="M1040 94V112"/>
+
+  <!-- main과 작업 브랜치 -->
+  <text x="40" y="112" class="mono">main</text>
+  <path class="line" d="M40 130H1240" stroke="url(#main)"/>
+  <path class="line work" d="M200 130C250 130 250 260 300 260H940C990 260 990 130 1040 130"/>
+  <text x="312" y="242" class="mono">work/v2.0.1</text>
+
+  <circle class="dot" cx="200" cy="130" r="6"/>
+  <circle class="dot" cx="440" cy="260" r="6"/>
+  <circle class="dot" cx="500" cy="260" r="6"/>
+  <circle class="dot" cx="560" cy="260" r="6"/>
+  <circle class="dot" cx="700" cy="260" r="6"/>
+  <circle class="dot" cx="890" cy="260" r="6"/>
+  <circle class="now" cx="1040" cy="130" r="11"/>
+  <text x="1062" y="166" class="mono">v2.0.1</text>
+
+  <!-- 아래: 브랜치에서 일어나는 일 -->
+  <text x="500" y="308" class="does" text-anchor="middle">커밋</text>
+  <text x="500" y="338" class="note" text-anchor="middle">답변마다 하나</text>
+
+  <text x="700" y="308" class="said" text-anchor="middle">“업데이트해”</text>
+  <text x="700" y="338" class="note" text-anchor="middle">브랜치를 깃허브로</text>
+
+  <text x="890" y="308" class="does" text-anchor="middle">테스트</text>
+  <text x="890" y="338" class="note" text-anchor="middle">통과해야 합친다</text>
+
+  <text x="40" y="386" class="note">따옴표 안은 내가 하는 말, 나머지는 루코가 하는 일.</text>
+</svg>

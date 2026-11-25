@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 520" role="img" aria-labelledby="t d">
+  <title id="t">RU RU, 6년차 개발자</title>
+  <desc id="d">2021년 10월 19일에 개발을 시작해 지금 6년차다. 2026년 11월부터 비서관 루코와 같이 일한다.</desc>
+  <style>
+    :root { --fg: #101c22; --muted: #57656e; --accent: #0d9488; }
+
+    text { fill: var(--fg); font-family: "Pretendard Variable", Pretendard, "Segoe UI Variable Display", "Segoe UI", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", system-ui, sans-serif; }
+    .mono { font-family: ui-monospace, "Cascadia Code", "SF Mono", Consolas, monospace; font-size: 22px; fill: var(--muted); }
+    .name { font-size: 200px; font-weight: 800; letter-spacing: -9px; }
+    .say { font-size: 34px; font-weight: 600; letter-spacing: -0.6px; }
+    .say.soft { font-weight: 400; fill: var(--muted); }
+    .num { font-size: 200px; font-weight: 800; fill: var(--accent); }
+    .unit { font-size: 60px; font-weight: 700; letter-spacing: -1.5px; }
+    .lab { font-size: 22px; fill: var(--muted); }
+    .join { font-size: 22px; }
+
+    .s-on { stop-color: var(--fg); stop-opacity: .34; }
+    .s-off { stop-color: var(--fg); stop-opacity: 0; }
+    .a-on { stop-color: var(--accent); stop-opacity: 1; }
+    .a-off { stop-color: var(--accent); stop-opacity: 0; }
+
+    .line { fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-dasharray: 1; }
+    .dot { fill: var(--fg); }
+    .now { fill: var(--accent); }
+    .ring { fill: none; stroke: var(--accent); stroke-width: 2; opacity: 0; }
+    .hair { stroke: var(--fg); stroke-opacity: .34; stroke-width: 2; }
+    .dot, .now, .ring, .hair { transform-box: fill-box; transform-origin: center; }
+    .hair { transform-origin: 50% 100%; }
+
+    /* 모든 움직임은 "완성된 그림으로 가는 길"이다. 키프레임에 출발 상태만 적어서, 움직임이 꺼져도 완성된 그림이 남는다. */
+    @keyframes draw { from { stroke-dashoffset: 1; } }
+    @keyframes rise { from { opacity: 0; transform: translateY(22px); } }
+    @keyframes pop  { from { opacity: 0; transform: scale(.2); } }
+    @keyframes show { from { opacity: 0; } }
+    @keyframes grow { from { transform: scaleY(0); } }
+    @keyframes ring { 0% { opacity: 0; transform: scale(.75); } 28% { opacity: .9; } 100% { opacity: 0; transform: scale(3.2); } }
+
+    .a-name { animation: rise 1.1s cubic-bezier(.18,.9,.22,1) both; }
+    .a-say1 { animation: rise 1s cubic-bezier(.2,.8,.2,1) .12s both; }
+    .a-say2 { animation: rise 1s cubic-bezier(.2,.8,.2,1) .24s both; }
+    .a-main { animation: draw 1.3s cubic-bezier(.65,0,.18,1) .2s both; }
+    /* 점이 켜지는 시각은 선의 머리가 그 점에 닿는 시각이다(선의 곡선에서 역산). */
+    .y1 .dot { animation: pop .6s cubic-bezier(.2,.8,.2,1) .20s both; } .y1 text { animation: show .6s ease-out .20s both; }
+    .y2 .dot { animation: pop .6s cubic-bezier(.2,.8,.2,1) .61s both; } .y2 text { animation: show .6s ease-out .61s both; }
+    .y3 .dot { animation: pop .6s cubic-bezier(.2,.8,.2,1) .70s both; } .y3 text { animation: show .6s ease-out .70s both; }
+    .y4 .dot { animation: pop .6s cubic-bezier(.2,.8,.2,1) .76s both; } .y4 text { animation: show .6s ease-out .76s both; }
+    .y5 .dot { animation: pop .6s cubic-bezier(.2,.8,.2,1) .82s both; } .y5 text { animation: show .6s ease-out .82s both; }
+    .now  { animation: pop .7s cubic-bezier(.2,.8,.2,1) .92s both; }
+    .ring { animation: ring 1.6s cubic-bezier(.2,.7,.2,1) .92s; }
+    .a-big  { animation: rise 1.15s cubic-bezier(.2,.8,.2,1) .55s both; }
+    .hair   { animation: grow .9s cubic-bezier(.2,.8,.2,1) 1s both; }
+    .a-branch { animation: draw 1s cubic-bezier(.65,0,.18,1) 1s both; }
+    .a-join .dot { animation: pop .6s cubic-bezier(.2,.8,.2,1) 1.5s both; }
+    .a-join text { animation: show .7s ease-out 1.45s both; }
+
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+  </style>
+
+  <defs>
+    <linearGradient id="main" gradientUnits="userSpaceOnUse" x1="40" y1="0" x2="1240" y2="0">
+      <stop offset="0" class="s-on"/><stop offset=".8" class="s-on"/><stop offset="1" class="s-off"/>
+    </linearGradient>
+    <linearGradient id="branch" gradientUnits="userSpaceOnUse" x1="1012" y1="0" x2="1240" y2="0">
+      <stop offset="0" class="a-on"/><stop offset=".55" class="a-on"/><stop offset="1" class="a-off"/>
+    </linearGradient>
+  </defs>
+
+  <text x="40" y="58" class="mono">kim089912</text>
+  <text x="1240" y="58" class="mono" text-anchor="end">with Rooco on Claude Fable 5.2</text>
+
+  <g class="a-name"><text x="32" y="250" class="name">RU RU</text></g>
+  <g class="a-say1"><text x="40" y="318" class="say">기획부터 서버까지 혼자 만듭니다.</text></g>
+  <g class="a-say2"><text x="40" y="364" class="say soft">2026년부터는 비서관 루코와 같이.</text></g>
+
+  <!-- 경력이 곧 커밋 이력이다. 점 하나가 한 해, 여섯 번째 점이 지금. -->
+  <path class="line a-main" d="M40 440H1240" pathLength="1" stroke="url(#main)"/>
+
+  <g class="y1"><circle class="dot" cx="40" cy="440" r="6"/><text x="30" y="412" class="lab">1년차</text><text x="30" y="482" class="mono">2021.10.19</text></g>
+  <g class="y2"><circle class="dot" cx="230" cy="440" r="6"/><text x="230" y="412" class="lab" text-anchor="middle">2년차</text></g>
+  <g class="y3"><circle class="dot" cx="420" cy="440" r="6"/><text x="420" y="412" class="lab" text-anchor="middle">3년차</text></g>
+  <g class="y4"><circle class="dot" cx="610" cy="440" r="6"/><text x="610" y="412" class="lab" text-anchor="middle">4년차</text></g>
+  <g class="y5"><circle class="dot" cx="800" cy="440" r="6"/><text x="800" y="412" class="lab" text-anchor="middle">5년차</text></g>
+
+  <path class="hair" d="M990 424V276"/>
+  <circle class="ring" cx="990" cy="440" r="11"/>
+  <circle class="now" cx="990" cy="440" r="11"/>
+  <g class="a-big">
+    <text x="990" y="250" class="num" text-anchor="middle">6</text>
+    <text x="1060" y="250" class="unit">년차</text>
+  </g>
+
+  <!-- 여섯 번째 해가 시작되고 곧 루코가 합류해 옆에서 같이 간다. -->
+  <path class="line a-branch" d="M1012 440C1042 440 1042 492 1072 492H1240" pathLength="1" stroke="url(#branch)"/>
+  <g class="a-join">
+    <circle class="dot" cx="1096" cy="492" r="6" style="fill: var(--accent)"/>
+    <text x="1000" y="499" class="join" text-anchor="end">2026.11 루코 합류</text>
+  </g>
+</svg>
