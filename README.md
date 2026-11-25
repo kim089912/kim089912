@@ -2,7 +2,7 @@
 
 <p><img src="assets/flow.svg" width="100%" alt="루코와 일하는 방식. 나는 말하고 결정한다. 나머지는 루코가 한다. 고쳐 달라고 하면 루코가 작업 브랜치를 만들고 답변마다 커밋한다. 업데이트하라고 하면 브랜치를 깃허브에 올려 테스트하고, 릴리즈하라고 하면 main에 합쳐 태그를 붙이고 릴리즈한다. 고치기 전에 브랜치부터. 테스트 없이는 합치지 않는다. 명령은 실행 전에 말한다. 합칠 때마다 태그와 릴리즈."></p>
 
-<p><img src="assets/works.svg" width="100%" alt="만든 것. 사이트와 시스템 10개. 주소가 적힌 것은 누르면 그 사이트로 간다. 로그인이 필요한 시스템은 로그인 화면만 실었다. 저장소는 모두 비공개다."></p>
+<p><img src="assets/works.svg" width="100%" alt="만든 것. 주요 사이트와 시스템 11개(화면 10곳과 루코). 주소가 적힌 것은 누르면 그 사이트로 간다. 로그인이 필요한 시스템은 로그인 화면만 실었다. 저장소는 모두 비공개다."></p>
 
 <p><a href="https://www.byangplus.com/"><img src="assets/work-byplus.svg" width="50%" alt="분양플러스. 시선을 사로잡는 분양 사이트 제작."></a><a href="https://www.auctionplus.co.kr/"><img src="assets/work-auctionplus.svg" width="50%" alt="옥션플러스. 부산·경남 경매 입찰 대리, 권리 분석, 현장 조사."></a></p>
 
